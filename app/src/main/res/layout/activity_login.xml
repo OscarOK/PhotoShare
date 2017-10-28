@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.changos.photoshare.login.Login"
-    android:background="@color/colorPrimary"
+    android:background="@drawable/background"
     android:orientation="vertical"
     android:paddingLeft="35dp"
     android:paddingRight="35dp"
@@ -21,7 +21,8 @@
     <LinearLayout
         android:id="@+id/login_form"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
         android:orientation="vertical">
 
 
@@ -29,6 +30,10 @@
             android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="217dp"
+            android:layout_marginBottom="32dp"
+            android:tint="#e6e6e6"
+            android:alpha="0.75"
+            android:tintMode="src_atop"
             app:srcCompat="@drawable/ic_jimmy" />
 
         <EditText

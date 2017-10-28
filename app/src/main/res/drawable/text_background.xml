@@ -4,7 +4,10 @@
         <shape android:shape="rectangle">
             <corners android:radius="5dp"/>
             <size android:height="35dp"/>
-            <solid android:color="@color/secondaryTextColor"/>
+            <solid android:color="@color/transparencyBox"/>
+
         </shape>
     </item>
+
+
 </selector>
