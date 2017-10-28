@@ -77,6 +77,22 @@
             android:textAlignment="center" />
 
     </LinearLayout>
+<<<<<<< HEAD
+=======
+    <TextView
+        android:id="@+id/registerTextBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="20dp"
+        android:text="Register"
+        android:onClick="registerClick"
+        android:clickable="true"
+        android:textSize="20sp"
+        android:textAlignment="center" />
+
+
+>>>>>>> 5f0dd0e57b27a0de6be43caab346641e57a9892b
 
 </FrameLayout>
 
