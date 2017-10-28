@@ -8,20 +8,23 @@
     android:background="@color/colorPrimary"
     android:orientation="vertical"
     android:paddingLeft="35dp"
-    android:paddingRight="35dp">
+    android:paddingRight="35dp"
+    android:theme="@style/Theme.AppCompat.NoActionBar">
 
-    
+
 
     <EditText
         android:id="@+id/emailRequest"
         style="@style/text_style"
         android:hint="@string/email"
+        android:textColorHint="@color/hintTextColorsito"
         android:inputType="textEmailAddress" />
 
     <EditText
         android:id="@+id/passwordRequest"
         style="@style/text_style"
         android:hint="@string/contrasena"
+        android:textColorHint="@color/hintTextColorsito"
         android:inputType="textPassword" />
 
     <TextView

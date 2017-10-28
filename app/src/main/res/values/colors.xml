@@ -8,4 +8,5 @@
     <color name="colorAccentLight">#63a3ff</color>
     <color name="primaryTextColor">#232323</color>
     <color name="secondaryTextColor">#f2f2f2</color>
+    <color name="hintTextColorsito">#b6b6b6</color>
 </resources>
