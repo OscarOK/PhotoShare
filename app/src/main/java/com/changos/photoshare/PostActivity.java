@@ -1,6 +1,7 @@
 package com.changos.photoshare;
 
 import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,6 +23,9 @@ public class PostActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
+        
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         titleEditText = (EditText) findViewById(R.id.post_title_edittext);
         descriptionEditText = (EditText) findViewById(R.id.post_description_edittext);
@@ -54,5 +58,6 @@ public class PostActivity extends AppCompatActivity {
                 postTitle, postDescription, postImage);
 
         newPost.uploadPostToDatabase();
+        finish();
     }
 }
