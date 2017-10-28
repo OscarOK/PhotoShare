@@ -1,5 +1,6 @@
 package com.changos.photoshare.login;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -7,9 +8,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,13 +28,42 @@ import com.google.firebase.auth.FirebaseUser;
 public class Login extends AppCompatActivity {
 
     FirebaseAuth mAuth;
+    EditText emailEditText;
+    EditText passwordEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        final Context mContext = Login.this;
+
         mAuth = FirebaseAuth.getInstance();
+
+        emailEditText = (EditText) findViewById(R.id.emailRequest_editText);
+        passwordEditText = (EditText) findViewById(R.id.passwordRequest_editText);
+
+        emailEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                if(i == 1){
+                    passwordEditText.requestFocus();
+                }
+                return true;
+            }
+        });
+
+        passwordEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                if(i == 2){
+                    InputMethodManager imm = (InputMethodManager)mContext.getSystemService(mContext.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(passwordEditText.getWindowToken(), 0);
+                    attemptLogin();
+                }
+                return false;
+            }
+        });
 
         //Texto registrar en negritas
         TextView textView = (TextView) findViewById(R.id.registerTextBtn);
@@ -48,6 +81,9 @@ public class Login extends AppCompatActivity {
         if(user != null){
             startNewActivity();
         }
+
+
+
     }
 
     public void registerClick(View view){
@@ -59,8 +95,6 @@ public class Login extends AppCompatActivity {
     }
 
     public void attemptLogin(){
-        final EditText emailEditText = (EditText) findViewById(R.id.emailRequest_editText);
-        final EditText passwordEditText = (EditText) findViewById(R.id.passwordRequest_editText);
 
         String email = emailEditText.getText().toString();
         String password = passwordEditText.getText().toString();
