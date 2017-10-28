@@ -35,7 +35,7 @@ public class CustomAdapter extends ArrayAdapter {
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View row = inflater.inflate(R.layout.custom_row, parent, false);
 
-        ImageView image      = row.findViewById(R.id.imageView);
+        ImageView image      = row.findViewById(R.id.iv_image);
         TextView title       = row.findViewById(R.id.tv_title);
         TextView description = row.findViewById(R.id.tv_description);
 
