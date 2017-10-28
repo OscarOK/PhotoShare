@@ -1,10 +1,7 @@
 package com.changos.photoshare;
 
-<<<<<<< HEAD
-=======
 import android.content.Intent;
 import android.graphics.Bitmap;
->>>>>>> 0345b0ee3300eaffa734691e2685b2f16fd70219
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;

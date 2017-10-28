@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.changos.photoshare.login.Login"
-    android:background="@drawable/background"
+    android:background="@drawable/background2"
     android:orientation="vertical"
     android:paddingLeft="35dp"
     android:paddingRight="35dp"
@@ -30,19 +30,11 @@
             android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="217dp"
-<<<<<<< HEAD
-
-=======
->>>>>>> 0345b0ee3300eaffa734691e2685b2f16fd70219
             android:layout_marginBottom="32dp"
             android:tint="#e6e6e6"
             android:alpha="0.75"
             android:tintMode="src_atop"
             app:srcCompat="@drawable/ic_jimmy" />
-<<<<<<< HEAD
-
-=======
->>>>>>> 0345b0ee3300eaffa734691e2685b2f16fd70219
 
         <EditText
             android:id="@+id/emailRequest_editText"

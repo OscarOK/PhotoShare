@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -33,7 +34,7 @@ public class Login extends AppCompatActivity {
 
         //Texto registrar en negritas
         TextView textView = (TextView) findViewById(R.id.registerTextBtn);
-        textView.setText(Html.fromHtml("No tienes cuenta? <b>Registrate.</b>"));
+        textView.setText(Html.fromHtml("¿No tienes cuenta? <b>Registrate.</b>"));
 
         Button loginButton = (Button) findViewById(R.id.login_btn);
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -64,21 +65,23 @@ public class Login extends AppCompatActivity {
         String email = emailEditText.getText().toString();
         String password = passwordEditText.getText().toString();
 
-        showProgressBar(true);
-
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        showProgressBar(false);
-                        if(task.isSuccessful()){
-                            startNewActivity();
-                        } else {
-                            passwordEditText.setText("");
-                            Toast.makeText(Login.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+        if(!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)){
+            showProgressBar(true);
+            mAuth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            showProgressBar(false);
+                            if(task.isSuccessful()){
+                                startNewActivity();
+                            } else {
+                                passwordEditText.setText("");
+                                Toast.makeText(Login.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                            }
                         }
-                    }
-                });
+                    });
+        }else Toast.makeText(this, "Alguno de los campos esta vacío", Toast.LENGTH_SHORT).show();
+
     }
 
     public void startNewActivity(){
