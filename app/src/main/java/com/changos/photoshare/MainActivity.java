@@ -1,5 +1,6 @@
 package com.changos.photoshare;
 
+import android.animation.Animator;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -59,13 +60,68 @@ public class MainActivity extends AppCompatActivity {
         cameraFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                globito.setVisibility(View.VISIBLE);
+
+                if(globito.getVisibility()==View.GONE){
+                    globito.setVisibility(View.VISIBLE);
+                    globito.setScaleX(0f);
+                    globito.setScaleY(0f);
+                    globito.animate().scaleX(1f).sca leY(1f).setDuration(150).setListener(new Animator.AnimatorListener() {
+                        @Override
+                        public void onAnimationStart(Animator animator) {
+
+                        }
+
+                        @Override
+                        public void onAnimationEnd(Animator animator) {
+
+                        }
+
+                        @Override
+                        public void onAnimationCancel(Animator animator) {
+
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(Animator animator) {
+
+                        }
+                    });
+                }else hideglobito(null);
+
             }
         });
     }
 
     public void hideglobito(View v){
-        globito.setVisibility(View.GONE);
+        if(globito.getVisibility()==View.VISIBLE){
+            globito.setScaleX(1f);
+            globito.setScaleY(1f);
+            globito.animate().scaleX(0f).scaleY(0f).setDuration(150).setListener(new Animator.AnimatorListener() {
+                @Override
+                public void onAnimationStart(Animator animator) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animator animator) {
+                    globito.setVisibility(View.GONE);
+                }
+
+                @Override
+                public void onAnimationCancel(Animator animator) {
+
+                }
+
+                @Override
+                public void onAnimationRepeat(Animator animator) {
+
+                }
+            });
+
+
+        }
+
+
     }
 
 
