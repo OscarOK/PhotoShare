@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/PhotoShare.iml" filepath="$PROJECT_DIR$/PhotoShare.iml" />
+      <module fileurl="file://D:\Code\PhotoShare\PhotoShare.iml" filepath="D:\Code\PhotoShare\PhotoShare.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://D:\Code\PhotoShare\app\app.iml" filepath="D:\Code\PhotoShare\app\app.iml" />
     </modules>
   </component>
 </project>

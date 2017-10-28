@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.changos.photoshare.login.Login"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical"
+    android:paddingLeft="35dp"
+    android:paddingRight="35dp">
+
+    
+
+    <EditText
+        android:id="@+id/emailRequest"
+        style="@style/text_style"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:id="@+id/passwordRequest"
+        style="@style/text_style"
+        android:hint="@string/contrasena"
+        android:inputType="textPassword" />
+
+    <TextView
+        android:id="@+id/registerTextBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="20dp"
+        android:text="Register"
+
+        android:textAlignment="center" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
+
+

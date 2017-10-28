@@ -2,4 +2,7 @@
     <string name="app_name">PhotoShare</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_main_maps">MainMapsActivity</string>
+    <string name="email">Correo Electronico</string>
+    <string name="contrasena">Contraseña</string>
 </resources>
