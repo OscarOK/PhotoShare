@@ -62,4 +62,9 @@
         <item name="android:layout_margin">10dp</item>
     </style>
 
+    <style name="AppTheme.PopUpImage">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowCloseOnTouchOutside">true</item>
+    </style>
+
 </resources>

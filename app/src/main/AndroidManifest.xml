@@ -16,9 +16,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".login.Login"></activity>
+        <activity
+            android:name=".login.Login"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".login.Registration"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".MainActivity"
@@ -50,9 +55,10 @@
             android:name=".ImageActivity"
             android:label="@string/title_activity_image"
             android:theme="@style/AppTheme" />
-        <activity android:name=".PostActivity"
-            android:theme="@style/AppTheme.WithActionBar"
-            android:label="@string/label_new_post"/>
+        <activity
+            android:name=".PostActivity"
+            android:label="@string/label_new_post"
+            android:theme="@style/AppTheme.WithActionBar" />
     </application>
 
 </manifest>
