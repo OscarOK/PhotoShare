@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,57 +11,73 @@
     android:paddingRight="35dp"
     android:theme="@style/Theme.AppCompat.NoActionBar">
 
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="217dp"
-        app:srcCompat="@drawable/ic_jimmy" />
-
-    <EditText
-        android:id="@+id/emailRequest"
-        style="@style/text_style"
-        android:hint="@string/email"
-        android:textColorHint="@color/hintTextColorsito"
-        android:inputType="textEmailAddress" />
-
-    <EditText
-        android:id="@+id/passwordRequest"
-        style="@style/text_style"
-        android:hint="@string/contrasena"
-        android:textColorHint="@color/hintTextColorsito"
-        android:inputType="textPassword" />
+    <ProgressBar
+        android:id="@+id/login_progressbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"/>
 
     <LinearLayout
+        android:id="@+id/login_form"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        android:orientation="horizontal">
 
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="217dp"
+            app:srcCompat="@drawable/ic_jimmy" />
 
-        <Button
-            style="@style/btn_style"
+        <EditText
+            android:id="@+id/emailRequest_editText"
+            style="@style/text_style"
+            android:hint="@string/email"
+            android:textColorHint="@color/hintTextColorsito"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/primaryTextColor" />
+
+        <EditText
+            android:id="@+id/passwordRequest_editText"
+            style="@style/text_style"
+            android:hint="@string/contrasena"
+            android:textColorHint="@color/hintTextColorsito"
+            android:inputType="textPassword"
+            android:textColor="@color/primaryTextColor" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+
+            android:orientation="horizontal">
+
+
+            <Button
+                android:id="@+id/login_btn"
+                style="@style/btn_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="40dp"
+                android:text="@string/btnRegister" />
+
+        </LinearLayout>
+        <TextView
+            android:id="@+id/registerTextBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            android:text="@string/btnRegister" />
+            android:layout_marginBottom="20dp"
+            android:text="Register"
+            android:onClick="registerClick"
+            android:clickable="true"
+            android:textAlignment="center" />
 
     </LinearLayout>
-    <TextView
-        android:id="@+id/registerTextBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="20dp"
-        android:text="Register"
-        android:onClick="registerClick"
-        android:clickable="true"
-        android:textAlignment="center" />
 
-
-
-</LinearLayout>
+</FrameLayout>
 
 
