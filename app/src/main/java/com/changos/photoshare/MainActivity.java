@@ -1,62 +1,64 @@
 package com.changos.photoshare;
 
-import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-
-    private static final int REQUEST_IMAGE_CAPTURE = 111;
-
-    private TextView mTextMessage;
-
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
-                    return true;
-                case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
-                    return true;
-                case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
-                    return true;
-            }
-            return false;
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        BottomNavigationView navigation = findViewById(R.id.navigation);
 
-        mTextMessage = (TextView) findViewById(R.id.message);
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
-        FloatingActionButton cameraFab = (FloatingActionButton) findViewById(R.id.camera_fab);
-
-        cameraFab.setOnClickListener(new View.OnClickListener() {
+        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onClick(View view) {
-                LaunchCamera();
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch (item.getItemId()) {
+
+                    case R.id.navigation_top:
+                        pushFragment(new TopFragment());
+                        return true;
+
+                    case R.id.navigation_map:
+                        pushFragment(new MapFragment());
+                        return true;
+
+                    case R.id.navigation_profile:
+                        pushFragment(new ProfileFragment());
+                        return true;
+                }
+
+                return true;
             }
         });
+
+        navigation.setSelectedItemId(R.id.navigation_map);
+        pushFragment(new MapFragment());
     }
 
+    protected void pushFragment(Fragment fragment) {
+        if (fragment == null)
+            return;
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
+        if (fragmentManager != null) {
+            FragmentTransaction ft = fragmentManager.beginTransaction();
+            if (ft != null) {
+                ft.replace(R.id.fragment_container, fragment);
+                ft.commit();
+            }
+        }
+    }
+/*
     public void LaunchCamera(){
         Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
@@ -77,5 +79,5 @@ public class MainActivity extends AppCompatActivity {
             i.putExtra("imageData", imageBitmap);
             startActivity(i);
         }
-    }
+    }*/
 }

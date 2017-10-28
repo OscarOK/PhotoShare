@@ -50,9 +50,11 @@
             android:name=".ImageActivity"
             android:label="@string/title_activity_image"
             android:theme="@style/AppTheme" />
+
         <activity android:name=".PostActivity"
             android:theme="@style/AppTheme.WithActionBar"
             android:label="@string/label_new_post"/>
+
     </application>
 
 </manifest>
