@@ -40,14 +40,13 @@
 
 
         <Button
+            style="@style/btn_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_marginTop="40dp"
-
-            android:background="@color/colorPrimaryDark"
-             />
+            android:text="@string/btnRegister" />
 
     </LinearLayout>
     <TextView
@@ -57,7 +56,8 @@
         android:layout_marginTop="40dp"
         android:layout_marginBottom="20dp"
         android:text="Register"
-
+        android:onClick="registerClick"
+        android:clickable="true"
         android:textAlignment="center" />
 
 

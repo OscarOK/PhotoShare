@@ -1,8 +1,10 @@
 package com.changos.photoshare.login;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
+import android.view.View;
 import android.widget.TextView;
 
 import com.changos.photoshare.R;
@@ -17,5 +19,13 @@ public class Login extends AppCompatActivity {
         //Texto registrar en negritas
         TextView textView = (TextView) findViewById(R.id.registerTextBtn);
         textView.setText(Html.fromHtml("No tienes cuenta? <b>Registrate.</b>"));
+    }
+
+    public void registerClick(View view){
+        if(view.getId()==R.id.registerTextBtn){
+            Intent myIntent = new Intent();
+            myIntent.setClass(Login.this, Registration.class);
+            startActivity(myIntent);
+        }
     }
 }
