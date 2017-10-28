@@ -12,6 +12,11 @@
     android:theme="@style/Theme.AppCompat.NoActionBar">
 
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="217dp"
+        app:srcCompat="@drawable/ic_jimmy" />
 
     <EditText
         android:id="@+id/emailRequest"
@@ -27,22 +32,34 @@
         android:textColorHint="@color/hintTextColorsito"
         android:inputType="textPassword" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="horizontal">
+
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="40dp"
+
+            android:background="@color/colorPrimaryDark"
+             />
+
+    </LinearLayout>
     <TextView
         android:id="@+id/registerTextBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="40dp"
         android:layout_marginBottom="20dp"
         android:text="Register"
 
         android:textAlignment="center" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
 
-
-    </LinearLayout>
 
 
 </LinearLayout>

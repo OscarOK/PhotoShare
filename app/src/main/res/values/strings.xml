@@ -5,4 +5,5 @@
     <string name="title_activity_main_maps">MainMapsActivity</string>
     <string name="email">Correo Electronico</string>
     <string name="contrasena">Contraseña</string>
+    <string name="btnRegister">Iniciar sesión</string>
 </resources>
