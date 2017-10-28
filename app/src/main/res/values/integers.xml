@@ -2,4 +2,6 @@
 <resources>
 
     <integer name="maxLengthDescriptionCustomRow">120</integer>
+    <integer name="maxLengthPostTitle">60</integer>
+    <integer name="maxLengthPostDescription">500</integer>
 </resources>

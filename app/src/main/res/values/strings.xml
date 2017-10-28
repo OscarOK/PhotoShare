@@ -13,4 +13,7 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="post_title">Título</string>
+    <string name="post_description">Descripción de la foto</string>
+    <string name="label_new_post">Nueva Publicación</string>
 </resources>
