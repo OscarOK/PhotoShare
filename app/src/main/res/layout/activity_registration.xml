@@ -1,9 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.changos.photoshare.login.Registration">
+    android:orientation="vertical"
 
-</android.support.constraint.ConstraintLayout>
+
+    tools:context="com.changos.photoshare.login.Registration"
+    android:background="@color/colorPrimary">
+
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_centerHorizontal="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:srcCompat="@drawable/ic_jimmy"
+        android:layout_weight="1"/>
+
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        android:layout_weight=".5"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:background="@color/secondaryTextColor"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:id="@+id/tituloRegistrate"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="25dp"
+            android:textSize="28sp"
+            android:textColor="@color/primaryTextColor"
+            android:gravity="center_horizontal"
+            android:text="@string/Registrate"
+            android:layout_marginBottom="20dp"/>
+
+        <EditText
+            android:id="@+id/createEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:textColor="@color/primaryTextColor"
+            android:hint="@string/email"
+            android:textColorHint="@color/hintTextColorsito"
+            android:inputType="textEmailAddress"
+            android:layout_marginBottom="20dp"/>
+
+        <EditText
+            android:id="@+id/createPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/contrasena"
+            android:textColor="@color/primaryTextColor"
+            android:textColorHint="@color/hintTextColorsito"
+            android:inputType="textPassword"
+            android:layout_marginBottom="20dp"/>
+
+        <EditText
+            android:id="@+id/createPasswordConfirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/contrasena"
+            android:textColor="@color/primaryTextColor"
+            android:textColorHint="@color/hintTextColorsito"
+            android:inputType="textPassword" />
+
+        <Button
+            android:id="@+id/registerBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Registrate"
+            style="@style/btn_style"
+            android:layout_margin="40dp"/>
+
+    </LinearLayout>
+
+</LinearLayout>

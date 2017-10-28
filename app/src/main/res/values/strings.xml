@@ -3,7 +3,23 @@
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_main_maps">MainMapsActivity</string>
-    <string name="email">Correo Electronico</string>
+    <string name="email">Correo Electrónico</string>
     <string name="contrasena">Contraseña</string>
     <string name="btnRegister">Iniciar sesión</string>
+    <
+    <
+    <
+    <
+    <
+    <
+    < HEAD
+    <string name="title_activity_image">ImageActivity</string>
+    <string name="title_activity_profile">ProfileActivity</string>
+    =======
+    <string name="Registrate">Regístrate</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    >>>>>>> 93ecfc5bcb6c1a192bf97558293b63d0e2b89ff3
 </resources>
