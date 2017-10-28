@@ -42,6 +42,8 @@
             android:hint="@string/email"
             android:textColorHint="@color/hintTextColorsito"
             android:inputType="textEmailAddress"
+            android:imeActionId="1"
+            android:imeActionLabel="@string/contrasena"
             android:textColor="@color/secondaryTextColor" />
 
         <EditText
@@ -49,6 +51,8 @@
             style="@style/text_style"
             android:hint="@string/contrasena"
             android:textColorHint="@color/hintTextColorsito"
+            android:imeActionId="2"
+            android:imeActionLabel="@string/btnRegister"
             android:inputType="textPassword"
             android:textColor="@color/secondaryTextColor" />
 
