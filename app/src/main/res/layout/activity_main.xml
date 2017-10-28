@@ -43,6 +43,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@android:drawable/ic_menu_camera" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:translationZ="-10dp"
+        android:clickable="true"
+        android:onClick="hideglobito"
+        />
     <LinearLayout
         android:id="@+id/globitoCool"
         android:visibility="gone"
@@ -58,7 +65,8 @@
         android:background="@drawable/popup"
         android:layout_marginBottom="5dp"
         android:padding="10dp"
-        android:clickable="true">
+        android:clickable="true"
+        android:translationZ="10dp">
 
 
         <ImageView
