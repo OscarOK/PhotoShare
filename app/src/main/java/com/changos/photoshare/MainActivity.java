@@ -1,29 +1,20 @@
 package com.changos.photoshare;
 
-<<<<<<< HEAD
-=======
+import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
->>>>>>> 93ecfc5bcb6c1a192bf97558293b63d0e2b89ff3
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
-import com.changos.photoshare.database.Post;
-
 public class MainActivity extends AppCompatActivity {
+
+    private static final int REQUEST_IMAGE_CAPTURE = 111;
 
     private TextView mTextMessage;
 
@@ -55,6 +46,36 @@ public class MainActivity extends AppCompatActivity {
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        FloatingActionButton cameraFab = (FloatingActionButton) findViewById(R.id.camera_fab);
+
+        cameraFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LaunchCamera();
+            }
+        });
     }
 
+    public void LaunchCamera(){
+        Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+        if(i.resolveActivity(getPackageManager()) != null){
+            startActivityForResult(i, REQUEST_IMAGE_CAPTURE);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK){
+            Bundle extras = data.getExtras();
+
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+
+            Intent i = new Intent();
+            i.setClass(MainActivity.this, PostActivity.class);
+            i.putExtra("imageData", imageBitmap);
+            startActivity(i);
+        }
+    }
 }
