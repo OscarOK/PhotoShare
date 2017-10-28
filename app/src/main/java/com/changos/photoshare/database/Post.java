@@ -2,14 +2,18 @@ package com.changos.photoshare.database;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.util.Base64;
 
+import com.changos.photoshare.PostActivity;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Hector on 28/10/2017.
@@ -18,9 +22,11 @@ import java.io.IOException;
 public class Post {
 
     private final static String db_nodeName_Post = "posts";
+    private final static String db_nodeName_Users = "users";
 
     private FirebaseDatabase firebaseDatabase;
-    private DatabaseReference databaseReference;
+    private DatabaseReference databasePostsReference;
+    private DatabaseReference databaseUsersReference;
 
     private String postID;
 
@@ -34,13 +40,14 @@ public class Post {
 
     public Post(String postID){
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference(db_nodeName_Post);
+        databasePostsReference = firebaseDatabase.getReference(db_nodeName_Post);
+        databaseUsersReference = firebaseDatabase.getReference(db_nodeName_Users);
         this.postID = postID;
     }
 
     public Post(String userID, String postTitle, String postDescription, Bitmap postImage){
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference(db_nodeName_Post);
+        databasePostsReference = firebaseDatabase.getReference(db_nodeName_Post);
         this.userID = userID;
         this.postTitle = postTitle;
         this.postDescription = postDescription;
@@ -51,10 +58,18 @@ public class Post {
 
     public void uploadPostToDatabase(){
         if(TextUtils.isEmpty(postID)){
-            postID = databaseReference.push().getKey();
+            postID = databasePostsReference.push().getKey();
         }
 
-        databaseReference.child(postID).setValue(this);
+        databasePostsReference.child(postID).setValue(this);
+
+        databaseUsersReference = FirebaseDatabase.getInstance().getReference()
+                .child(db_nodeName_Users).child(userID).child(db_nodeName_Post);
+
+        Map<String, Object> map = new HashMap<>();
+        map.put(postID, postID);
+
+        databaseUsersReference.updateChildren(map);
     }
 
     public String getUserID(){ return this.userID; }
