@@ -8,6 +8,7 @@
          location permissions for the 'MyLocation' functionality. 
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
     <application
         android:allowBackup="true"
@@ -16,12 +17,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
             android:name=".login.Login"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".login.Registration"
             android:configChanges="orientation"
@@ -54,11 +53,14 @@
             android:name=".ImageActivity"
             android:label="@string/title_activity_image"
             android:theme="@style/AppTheme" />
-
-        <activity android:name=".PostActivity"
-            android:theme="@style/AppTheme.WithActionBar"
-            android:label="@string/label_new_post"/>
-
+        <activity
+            android:name=".PostActivity"
+            android:label="@string/label_new_post"
+            android:theme="@style/AppTheme.WithActionBar" />
+        <activity
+            android:name=".PostActivityGood"
+            android:label="@string/title_activity_post_good"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

@@ -1,10 +1,11 @@
 package com.changos.photoshare;
 
 import android.graphics.Bitmap;
-import android.os.AsyncTask;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -14,7 +15,7 @@ import android.widget.Toast;
 import com.changos.photoshare.database.Post;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class PostActivity extends AppCompatActivity {
+public class PostActivityGood extends AppCompatActivity {
 
     EditText titleEditText;
     EditText descriptionEditText;
@@ -24,24 +25,25 @@ public class PostActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_post);
-        
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setContentView(R.layout.activity_post_good);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
 
-        titleEditText = (EditText) findViewById(R.id.post_title_edittext);
-        descriptionEditText = (EditText) findViewById(R.id.post_description_edittext);
+        titleEditText = (EditText) findViewById(R.id.pictureTitle);
+        descriptionEditText = (EditText) findViewById(R.id.pictureDescription);
 
         if(getIntent().getExtras() != null) {
-
+            Log.d("hola", "Si entra");
+            Toast.makeText(this, "cool", Toast.LENGTH_SHORT).show();
             postImage = (Bitmap) getIntent().getExtras().getParcelable("imageData");
 
-            ImageView postImageView = (ImageView) findViewById(R.id.postImageView);
+            ImageView postImageView = (ImageView) findViewById(R.id.picturePost);
 
             postImageView.setImageBitmap(postImage);
         }
 
-        FloatingActionButton finishPostFab = (FloatingActionButton) findViewById(R.id.finish_post_fab);
+        FloatingActionButton finishPostFab = (FloatingActionButton) findViewById(R.id.fab);
 
         finishPostFab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,9 +51,7 @@ public class PostActivity extends AppCompatActivity {
                 upload_post();
             }
         });
-
     }
-
     public void upload_post(){
         String postTitle = titleEditText.getText().toString();
         String postDescription = descriptionEditText.getText().toString();
@@ -64,4 +64,5 @@ public class PostActivity extends AppCompatActivity {
         finish();
         Toast.makeText(this, "Publicando...", Toast.LENGTH_SHORT).show();
     }
+
 }

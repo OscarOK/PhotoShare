@@ -2,6 +2,8 @@ package com.changos.photoshare;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -13,15 +15,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.CameraPosition;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+
+import static android.app.Activity.RESULT_OK;
 
 public class MapFragment extends Fragment {
 
@@ -31,11 +35,13 @@ public class MapFragment extends Fragment {
     private MapView mMapView;
     private GoogleMap mGoogleMap;
 
+
     private OnFragmentInteractionListener mListener;
 
     private LinearLayout globito;
 
-    public MapFragment() {}
+    public MapFragment() {
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,6 +51,7 @@ public class MapFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_map, container, false);
 
         mMapView = view.findViewById(R.id.mapView);
@@ -75,9 +82,16 @@ public class MapFragment extends Fragment {
         cameraFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                globito.setVisibility(View.VISIBLE);
+
+                if (globito.getVisibility() == View.GONE) {
+                    globito.setVisibility(View.VISIBLE);
+                } else {
+                    globito.setVisibility(View.GONE);
+                }
+
             }
-    });
+        });
+
 
         try {
             MapsInitializer.initialize(getActivity().getApplicationContext());
@@ -85,6 +99,8 @@ public class MapFragment extends Fragment {
             e.printStackTrace();
         }
 
+
+        //mGoogleMap.addMarker(new MarkerOptions().position())
         mMapView.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(GoogleMap mMap) {
@@ -96,20 +112,20 @@ public class MapFragment extends Fragment {
                 mGoogleMap.setMyLocationEnabled(true);
 
                 // For dropping a marker at a point on the Map
+                /*
                 LatLng sydney = new LatLng(-34, 151);
                 mGoogleMap.addMarker(new MarkerOptions().position(sydney).title("Marker Title").snippet("Marker Description"));
 
                 CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(12).build();
-                mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+                mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));*/
             }
         });
-
 
 
         return view;
     }
 
-    public void hideglobito(View v){
+    public void hideglobito() {
         globito.setVisibility(View.GONE);
     }
 
@@ -123,6 +139,7 @@ public class MapFragment extends Fragment {
     public void onResume() {
         super.onResume();
         mMapView.onResume();
+        hideglobito();
     }
 
     @Override
@@ -148,16 +165,56 @@ public class MapFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    private void launchCamera(){
+    private void launchCamera() {
         Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-        if(i.resolveActivity(getActivity().getPackageManager()) != null){
+        if (i.resolveActivity(getActivity().getPackageManager()) != null) {
             startActivityForResult(i, REQUEST_IMAGE_CAPTURE);
         }
     }
-    private void launchGallery(){
+
+    private void launchGallery() {
         Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
         photoPickerIntent.setType("image/*");
         startActivityForResult(photoPickerIntent, SELECT_PHOTO);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK && data != null) {
+            Bundle extras = data.getExtras();
+
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+
+            Intent i = new Intent();
+            i.setClass(getContext(), PostActivityGood.class);
+            i.putExtra("imageData", imageBitmap);
+            startActivity(i);
+        } else if (requestCode == SELECT_PHOTO && resultCode == RESULT_OK) {
+            Uri imageUri = data.getData();
+
+            // declare a stream to read the image data from the SD Card.
+            InputStream inputStream;
+
+            // we are getting an input stream, based on the URI of the image.
+            try {
+                inputStream = getContext().getContentResolver().openInputStream(imageUri);
+
+                // get a bitmap from the stream.
+                Bitmap image = BitmapFactory.decodeStream(inputStream);
+
+
+                startActivity(new Intent(getContext(), PostActivity.class));
+                Toast.makeText(getContext(), "si se pudo", Toast.LENGTH_SHORT).show();
+
+                // show the image to the user
+
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                // show a message to the user indictating that the image is unavailable.
+                Toast.makeText(getContext(), "No se pudo", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }
