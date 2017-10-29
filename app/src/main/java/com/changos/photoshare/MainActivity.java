@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
                     globito.setVisibility(View.VISIBLE);
                     globito.setScaleX(0f);
                     globito.setScaleY(0f);
-                    globito.animate().scaleX(1f).sca leY(1f).setDuration(150).setListener(new Animator.AnimatorListener() {
+                    globito.animate().scaleX(1f).scaleY(1f).setDuration(150).setListener(new Animator.AnimatorListener() {
                         @Override
                         public void onAnimationStart(Animator animator) {
 
