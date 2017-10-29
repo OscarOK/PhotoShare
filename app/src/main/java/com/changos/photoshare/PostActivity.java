@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.changos.photoshare.database.Post;
 import com.google.firebase.auth.FirebaseAuth;
@@ -59,5 +60,6 @@ public class PostActivity extends AppCompatActivity {
 
         newPost.uploadPostToDatabase();
         finish();
+        Toast.makeText(this, "Publicando...", Toast.LENGTH_SHORT).show();
     }
 }

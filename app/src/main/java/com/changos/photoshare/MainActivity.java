@@ -58,26 +58,4 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-/*
-    public void LaunchCamera(){
-        Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
-        if(i.resolveActivity(getPackageManager()) != null){
-            startActivityForResult(i, REQUEST_IMAGE_CAPTURE);
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK){
-            Bundle extras = data.getExtras();
-
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
-
-            Intent i = new Intent();
-            i.setClass(MainActivity.this, PostActivity.class);
-            i.putExtra("imageData", imageBitmap);
-            startActivity(i);
-        }
-    }*/
 }
