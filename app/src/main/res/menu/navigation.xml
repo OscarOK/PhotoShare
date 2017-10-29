@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/navigation_top"
-        android:icon="@drawable/ic_trophy_award"
+        android:icon="@drawable/ic_exit_to_app_black_24dp"
         android:title="@string/title_top" />
 
     <item

@@ -34,15 +34,6 @@ public class TopFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_top, container, false);
 
-        topPics = view.findViewById(R.id.lv_top_pics);
-
-        titles = new String[]{"Hola", "Hey", "adios"};
-        descriptions = new String[]{"HLASDOJAOSDJOASJDAO", "FJHASKDAKJHFLKDJS", "ASDFGHJKHFGHJKDFG"};
-        imgs = new int[] {R.drawable.ic_jimmy, R.drawable.ic_home_black_24dp, R.drawable.ic_launcher_background};
-
-        CustomAdapter customAdapter = new CustomAdapter(getContext(), titles, descriptions, imgs);
-        topPics.setAdapter(customAdapter);
-
         return view;
     }
 
