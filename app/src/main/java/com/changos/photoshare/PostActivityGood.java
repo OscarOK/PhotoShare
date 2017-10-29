@@ -28,6 +28,7 @@ public class PostActivityGood extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
         titleEditText = (EditText) findViewById(R.id.pictureTitle);
         descriptionEditText = (EditText) findViewById(R.id.pictureDescription);
 
