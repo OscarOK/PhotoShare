@@ -14,5 +14,6 @@
     <string name="title_top">Top</string>
     <string name="title_map">Mapa</string>
     <string name="title_profile">Perfíl</string>
+    <string name="title_activity_post_good">PostActivityGood</string>
 
 </resources>
