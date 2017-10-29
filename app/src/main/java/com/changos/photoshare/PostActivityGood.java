@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -33,6 +34,8 @@ public class PostActivityGood extends AppCompatActivity {
         descriptionEditText = (EditText) findViewById(R.id.pictureDescription);
 
         if(getIntent().getExtras() != null) {
+            Log.d("hola", "Si entra");
+            Toast.makeText(this, "cool", Toast.LENGTH_SHORT).show();
             postImage = (Bitmap) getIntent().getExtras().getParcelable("imageData");
 
             ImageView postImageView = (ImageView) findViewById(R.id.picturePost);

@@ -11,11 +11,13 @@ import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -26,6 +28,9 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+
 import static android.app.Activity.RESULT_OK;
 
 public class MapFragment extends Fragment {
@@ -35,6 +40,7 @@ public class MapFragment extends Fragment {
 
     private MapView mMapView;
     private GoogleMap mGoogleMap;
+
 
     private OnFragmentInteractionListener mListener;
 
@@ -50,6 +56,7 @@ public class MapFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_map, container, false);
 
         mMapView = view.findViewById(R.id.mapView);
@@ -184,23 +191,31 @@ public class MapFragment extends Fragment {
             i.setClass(getContext(), PostActivityGood.class);
             i.putExtra("imageData", imageBitmap);
             startActivity(i);
-        } else if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            Uri pickedImage = data.getData();
-            // Let's read picked image path using content resolver
-            String[] filePath = {MediaStore.Images.Media.DATA};
-            Cursor cursor = getContext().getContentResolver().query(pickedImage, filePath, null, null, null);
-            cursor.moveToFirst();
-            String imagePath = cursor.getString(cursor.getColumnIndex(filePath[0]));
+        } else if (requestCode == SELECT_PHOTO && resultCode == RESULT_OK ) {
+            Uri imageUri = data.getData();
 
-            BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inPreferredConfig = Bitmap.Config.ARGB_8888;
-            Bitmap bitmap = BitmapFactory.decodeFile(imagePath, options);
+            // declare a stream to read the image data from the SD Card.
+            InputStream inputStream;
 
-            // Do something with the bitmap
+            // we are getting an input stream, based on the URI of the image.
+            try {
+                inputStream = getContext().getContentResolver().openInputStream(imageUri);
+
+                // get a bitmap from the stream.
+                Bitmap image = BitmapFactory.decodeStream(inputStream);
+
+                
+                startActivity(new Intent(getContext(),PostActivity.class));
+                Toast.makeText(getContext(), "si se pudo", Toast.LENGTH_SHORT).show();
+
+                // show the image to the user
 
 
-            // At the end remember to close the cursor or you will end with the RuntimeException!
-            cursor.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                // show a message to the user indictating that the image is unavailable.
+                Toast.makeText(getContext(), "No se pudo", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }

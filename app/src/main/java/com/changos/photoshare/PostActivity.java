@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -32,6 +33,7 @@ public class PostActivity extends AppCompatActivity {
         descriptionEditText = (EditText) findViewById(R.id.post_description_edittext);
 
         if(getIntent().getExtras() != null) {
+
             postImage = (Bitmap) getIntent().getExtras().getParcelable("imageData");
 
             ImageView postImageView = (ImageView) findViewById(R.id.postImageView);
