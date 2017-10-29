@@ -180,7 +180,7 @@ public class MapFragment extends Fragment {
             Bitmap imageBitmap = (Bitmap) extras.get("data");
 
             Intent i = new Intent();
-            i.setClass(getContext(), PostActivity.class);
+            i.setClass(getContext(), PostActivityGood.class);
             i.putExtra("imageData", imageBitmap);
             startActivity(i);
         } else if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {

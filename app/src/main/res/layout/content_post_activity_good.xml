@@ -35,5 +35,11 @@
             android:layout_below="@id/pictureTitle"
             android:inputType="textMultiLine"
             />
+
+        <ImageView
+            android:id="@+id/picturePost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/pictureDescription" />
     </RelativeLayout>
 </ScrollView>
