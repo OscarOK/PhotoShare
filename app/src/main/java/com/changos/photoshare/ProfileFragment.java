@@ -56,14 +56,6 @@ public class ProfileFragment extends Fragment {
                 R.drawable.img_casa_chihuahua
         };
 
-        coordenadas = new double[]{
-                28.633198, -106.076152,
-                28.659573, -106.085489,
-                28.690762, -106.103280,
-                28.663400, -106.112240,
-                28.639644, -106.073935
-        };
-
         CustomAdapter customAdapter = new CustomAdapter(getContext(), titles, descriptions, imgs);
         profilePics.setAdapter(customAdapter);
 

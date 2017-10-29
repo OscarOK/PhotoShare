@@ -21,6 +21,8 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -110,6 +112,30 @@ public class MapFragment extends Fragment {
                     return;
                 }
                 mGoogleMap.setMyLocationEnabled(true);
+
+                String[] titles = new String[]{"Gato", "Primer Beso", "Una Tarde en mi Casa", "Una Fría Mañana", "Casa Redonda"};
+                String[] descriptions = new String[]{
+                        "Peludo y adorable, gatito apestocito que le dan de comer",
+                        "Y aquí comenzó nuestra historia",
+                        "Pensaba salir de mi casa, pero tomé un tiempo para admirar esta belleza",
+                        "Apesar de llegar temprano, es curioso ver estas pequeñas maravillas",
+                        "Pasando una navidad increible con mis familiares cercanos"
+                };
+                double[] coordenadas = new double[]{
+                        28.633198, -106.076152,
+                        28.659573, -106.085489,
+                        28.690762, -106.103280,
+                        28.663400, -106.112240,
+                        28.639644, -106.073935
+                };
+
+                int j = 0;
+
+                for (int i = 0; i < 10; i += 2) {
+                    LatLng marker = new LatLng(coordenadas[i], coordenadas[i + 1]);
+                    mGoogleMap.addMarker(new MarkerOptions().position(marker).title(titles[j]).snippet(descriptions[j]));
+                    j++;
+                }
 
                 // For dropping a marker at a point on the Map
                 /*
