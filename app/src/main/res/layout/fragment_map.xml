@@ -65,7 +65,6 @@
                 android:layout_marginBottom="24dp"
                 android:layout_weight="1"
                 android:clickable="true"
-                android:onClick="launchCamera"
                 app:srcCompat="@android:drawable/ic_menu_camera" />
 
             <ImageView
@@ -75,7 +74,6 @@
                 android:layout_marginBottom="24dp"
                 android:layout_weight="1"
                 android:clickable="true"
-                android:onClick="openGallery"
                 app:srcCompat="@android:drawable/ic_menu_gallery" />
         </LinearLayout>
 

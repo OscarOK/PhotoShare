@@ -11,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -36,11 +37,6 @@ public class MapFragment extends Fragment {
 
     public MapFragment() {}
 
-    public void hideglobito(View v){
-        globito.setVisibility(View.GONE);
-    }
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +52,23 @@ public class MapFragment extends Fragment {
         mMapView.onResume();
 
         globito = view.findViewById(R.id.globitoCool);
+
+        ImageView openCamara = view.findViewById(R.id.cameraIcon);
+        ImageView openGallery = view.findViewById(R.id.galleryIcon);
+
+        openCamara.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                launchCamera();
+            }
+        });
+
+        openGallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                launchGallery();
+            }
+        });
 
         FloatingActionButton cameraFab = view.findViewById(R.id.camera_fab);
 
@@ -91,14 +104,13 @@ public class MapFragment extends Fragment {
             }
         });
 
+
+
         return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+    public void hideglobito(View v){
+        globito.setVisibility(View.GONE);
     }
 
     @Override
@@ -136,14 +148,14 @@ public class MapFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    public void launchCamera(View v){
+    private void launchCamera(){
         Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
         if(i.resolveActivity(getActivity().getPackageManager()) != null){
             startActivityForResult(i, REQUEST_IMAGE_CAPTURE);
         }
     }
-    public void openGallery(View v){
+    private void launchGallery(){
         Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
         photoPickerIntent.setType("image/*");
         startActivityForResult(photoPickerIntent, SELECT_PHOTO);
