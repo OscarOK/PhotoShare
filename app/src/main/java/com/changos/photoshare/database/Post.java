@@ -2,9 +2,11 @@ package com.changos.photoshare.database;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.util.Base64;
 
+import com.changos.photoshare.PostActivity;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 

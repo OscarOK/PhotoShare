@@ -10,8 +10,11 @@
     </style>
 
     <style name="AppTheme.WithActionBar" parent="Theme.AppCompat.Light">
-        <item name="colorPrimary">@color/secondaryTextColor</item>
-        <item name="titleTextColor">@color/colorPrimaryLight</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColorHint">@color/hintTextColorsito</item>
+        <item name="android:actionMenuTextColor">@color/secondaryTextColor</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -25,7 +28,7 @@
 
     <style name="text_style">
         <item name="android:gravity">center</item>
-        <item name="android:background">@drawable/text_background</item>
+        <item name="android:background" >@drawable/text_background</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">40dp</item>
         <item name="android:ems">10</item>
@@ -46,7 +49,6 @@
         <item name="android:textSize">20sp</item>
         <item name="android:layout_margin">10dp</item>
     </style>
-
     <style name="btn_style_3">
         <item name="android:background">@drawable/btn_background</item>
         <item name="android:gravity">center</item>

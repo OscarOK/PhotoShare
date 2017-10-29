@@ -15,6 +15,5 @@
     <string name="title_notifications">Notifications</string>
     <string name="post_title">Título</string>
     <string name="post_description">Descripción de la foto</string>
-    <string name="label_new_post">Publicar Imagen</string>
-    <string name="title_activity_post3">PostActivity3</string>
+    <string name="label_new_post">Nueva Publicación</string>
 </resources>
