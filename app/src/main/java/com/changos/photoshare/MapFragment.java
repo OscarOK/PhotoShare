@@ -120,7 +120,7 @@ public class MapFragment extends Fragment {
         return view;
     }
 
-    public void hideglobito(View v){
+    public void hideglobito(){
         globito.setVisibility(View.GONE);
     }
 
@@ -134,6 +134,7 @@ public class MapFragment extends Fragment {
     public void onResume() {
         super.onResume();
         mMapView.onResume();
+        hideglobito();
     }
 
     @Override
