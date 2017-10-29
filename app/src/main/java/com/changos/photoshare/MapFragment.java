@@ -2,32 +2,28 @@ package com.changos.photoshare;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.CameraPosition;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -39,11 +35,13 @@ public class MapFragment extends Fragment {
     private MapView mMapView;
     private GoogleMap mGoogleMap;
 
+
     private OnFragmentInteractionListener mListener;
 
     private LinearLayout globito;
 
-    public MapFragment() {}
+    public MapFragment() {
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,6 +51,7 @@ public class MapFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_map, container, false);
 
         mMapView = view.findViewById(R.id.mapView);
@@ -91,7 +90,7 @@ public class MapFragment extends Fragment {
                 }
 
             }
-    });
+        });
 
 
         try {
@@ -123,11 +122,10 @@ public class MapFragment extends Fragment {
         });
 
 
-
         return view;
     }
 
-    public void hideglobito(){
+    public void hideglobito() {
         globito.setVisibility(View.GONE);
     }
 
@@ -167,14 +165,15 @@ public class MapFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    private void launchCamera(){
+    private void launchCamera() {
         Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-        if(i.resolveActivity(getActivity().getPackageManager()) != null){
+        if (i.resolveActivity(getActivity().getPackageManager()) != null) {
             startActivityForResult(i, REQUEST_IMAGE_CAPTURE);
         }
     }
-    private void launchGallery(){
+
+    private void launchGallery() {
         Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
         photoPickerIntent.setType("image/*");
         startActivityForResult(photoPickerIntent, SELECT_PHOTO);
@@ -191,23 +190,31 @@ public class MapFragment extends Fragment {
             i.setClass(getContext(), PostActivityGood.class);
             i.putExtra("imageData", imageBitmap);
             startActivity(i);
-        } else if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            Uri pickedImage = data.getData();
-            // Let's read picked image path using content resolver
-            String[] filePath = {MediaStore.Images.Media.DATA};
-            Cursor cursor = getContext().getContentResolver().query(pickedImage, filePath, null, null, null);
-            cursor.moveToFirst();
-            String imagePath = cursor.getString(cursor.getColumnIndex(filePath[0]));
+        } else if (requestCode == SELECT_PHOTO && resultCode == RESULT_OK) {
+            Uri imageUri = data.getData();
 
-            BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inPreferredConfig = Bitmap.Config.ARGB_8888;
-            Bitmap bitmap = BitmapFactory.decodeFile(imagePath, options);
+            // declare a stream to read the image data from the SD Card.
+            InputStream inputStream;
 
-            // Do something with the bitmap
+            // we are getting an input stream, based on the URI of the image.
+            try {
+                inputStream = getContext().getContentResolver().openInputStream(imageUri);
+
+                // get a bitmap from the stream.
+                Bitmap image = BitmapFactory.decodeStream(inputStream);
 
 
-            // At the end remember to close the cursor or you will end with the RuntimeException!
-            cursor.close();
+                startActivity(new Intent(getContext(), PostActivity.class));
+                Toast.makeText(getContext(), "si se pudo", Toast.LENGTH_SHORT).show();
+
+                // show the image to the user
+
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                // show a message to the user indictating that the image is unavailable.
+                Toast.makeText(getContext(), "No se pudo", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }
