@@ -2,6 +2,9 @@ package com.changos.photoshare;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -22,6 +25,8 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import static android.app.Activity.RESULT_OK;
 
 public class MapFragment extends Fragment {
 
@@ -75,7 +80,13 @@ public class MapFragment extends Fragment {
         cameraFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                globito.setVisibility(View.VISIBLE);
+
+                if (globito.getVisibility() == View.GONE) {
+                    globito.setVisibility(View.VISIBLE);
+                } else {
+                    globito.setVisibility(View.GONE);
+                }
+
             }
     });
 
@@ -159,5 +170,36 @@ public class MapFragment extends Fragment {
         Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
         photoPickerIntent.setType("image/*");
         startActivityForResult(photoPickerIntent, SELECT_PHOTO);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK && data != null) {
+            Bundle extras = data.getExtras();
+
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+
+            Intent i = new Intent();
+            i.setClass(getContext(), PostActivity.class);
+            i.putExtra("imageData", imageBitmap);
+            startActivity(i);
+        } else if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Uri pickedImage = data.getData();
+            // Let's read picked image path using content resolver
+            String[] filePath = {MediaStore.Images.Media.DATA};
+            Cursor cursor = getContext().getContentResolver().query(pickedImage, filePath, null, null, null);
+            cursor.moveToFirst();
+            String imagePath = cursor.getString(cursor.getColumnIndex(filePath[0]));
+
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+            Bitmap bitmap = BitmapFactory.decodeFile(imagePath, options);
+
+            // Do something with the bitmap
+
+
+            // At the end remember to close the cursor or you will end with the RuntimeException!
+            cursor.close();
+        }
     }
 }
