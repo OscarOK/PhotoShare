@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.changos.photoshare.R;
 
+import java.util.List;
+
 /**
  * Created by Oscar Eduardo on 28-Oct-17.
  */
@@ -19,11 +21,18 @@ import com.changos.photoshare.R;
 public class CustomAdapter extends ArrayAdapter {
 
     int[] imageArray;
-    String[] titleArray, descriptionArray;
+    List<String> titleArray, descriptionArray;
 
-    public CustomAdapter(@NonNull Context context, String[] titles, String[] descriptions, int[] images) {
+    public CustomAdapter(@NonNull Context context, List<String> titles, List<String> descriptions, int[] images) {
         super(context, R.layout.custom_row, R.id.tv_title, titles);
         this.imageArray       = images;
+        this.titleArray       = titles;
+        this.descriptionArray = descriptions;
+    }
+
+    public CustomAdapter(@NonNull Context context, List<String> titles, List<String> descriptions) {
+        super(context, R.layout.custom_row, R.id.tv_title, titles);
+        this.imageArray       = null;
         this.titleArray       = titles;
         this.descriptionArray = descriptions;
     }
@@ -38,11 +47,26 @@ public class CustomAdapter extends ArrayAdapter {
         ImageView image      = row.findViewById(R.id.iv_image);
         TextView title       = row.findViewById(R.id.tv_title);
         TextView description = row.findViewById(R.id.tv_description);
+        if(imageArray != null)
+            image.setImageResource(imageArray[position]);
+        else
+            image.setImageResource(R.drawable.img_casa_chihuahua);
 
-        image.setImageResource(imageArray[position]);
-        title.setText(titleArray[position]);
-        description.setText(descriptionArray[position]);
+        if(titleArray != null)
+            title.setText(titleArray.get(position));
+        else
+            title.setText("null");
+        if(descriptionArray != null)
+            description.setText(descriptionArray.get(position));
+        else
+            description.setText("null");
 
         return row;
+    }
+
+    public void setNewData(List<String> titles, List<String> descriptions){
+        this.titleArray       = titles;
+        this.descriptionArray = descriptions;
+        notifyDataSetChanged();
     }
 }

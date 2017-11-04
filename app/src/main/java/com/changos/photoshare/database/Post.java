@@ -34,7 +34,7 @@ public class Post {
 
     private String postTitle;
     private String postDescription;
-    private String postEncodedImage;
+//    private String postEncodedImage;
 
     public Post(){}
 
@@ -53,7 +53,7 @@ public class Post {
         this.postDescription = postDescription;
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         postImage.compress(Bitmap.CompressFormat.PNG, 100, baos);
-        this.postEncodedImage = Base64.encodeToString(baos.toByteArray(), Base64.DEFAULT);
+//        this.postEncodedImage = Base64.encodeToString(baos.toByteArray(), Base64.DEFAULT);
     }
 
     public void uploadPostToDatabase(){
@@ -78,15 +78,15 @@ public class Post {
 
     public String getPostDescription(){ return this.postDescription; }
 
-    public Bitmap getPostImage(){
-        Bitmap imageBitmap = null;
-        try{
-            imageBitmap = decodeFromFirebaseBase64(postEncodedImage);
-        } catch (IOException e){
-            e.printStackTrace();
-        }
-        return imageBitmap;
-    }
+//    public Bitmap getPostImage(){
+//        Bitmap imageBitmap = null;
+//        try{
+//            imageBitmap = decodeFromFirebaseBase64(postEncodedImage);
+//        } catch (IOException e){
+//            e.printStackTrace();
+//        }
+//        return imageBitmap;
+//    }
 
     public static Bitmap decodeFromFirebaseBase64(String image) throws IOException {
         byte[] decodedByteArray = android.util.Base64.decode(image, Base64.DEFAULT);
@@ -99,11 +99,11 @@ public class Post {
 
     public void setPostDescription(String postDescription){ this.postDescription = postDescription; }
 
-    public void setPostImage(Bitmap postImage){
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        postImage.compress(Bitmap.CompressFormat.PNG, 100, baos);
-        this.postEncodedImage = Base64.encodeToString(baos.toByteArray(), Base64.DEFAULT);
-    }
+//    public void setPostImage(Bitmap postImage){
+//        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//        postImage.compress(Bitmap.CompressFormat.PNG, 100, baos);
+//        this.postEncodedImage = Base64.encodeToString(baos.toByteArray(), Base64.DEFAULT);
+//    }
 
 
 
